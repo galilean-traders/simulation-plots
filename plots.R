@@ -34,20 +34,24 @@ dt[direction == "buy", profit := close_price - open_price]
 dt[direction == "sell", profit := open_price - close_price]
 
 hours_histogram <- ggplot(dt, aes(x=hours, fill=outcome)) +
+    ggtitle(basename) +
     geom_histogram(binwidth=1, position="identity", alpha=0.4)
 save_plot(basename, hours_histogram)
 
 length_histogram <- ggplot(dt, aes(x=length, fill=outcome)) +
+    ggtitle(basename) +
     geom_histogram(binwidth=10, position="identity", alpha=0.4)
 save_plot(basename, length_histogram)
 
 weekday_histogram <- ggplot(dt, aes(x=weekdays(datetime), fill=outcome)) +
+    ggtitle(basename) +
     geom_histogram(binwidth=1, position="identity", alpha=0.4) +
     scale_x_chron(format="%A", n=7) +
     theme(axis.text.x = element_text(angle=70, hjust=1))
 save_plot(basename, weekday_histogram)
 
 spread_histogram <- ggplot(dt, aes(x=(spread / pip), fill=outcome)) +
+    ggtitle(basename) +
     geom_histogram(position="identity", alpha=0.4)
 save_plot(basename, spread_histogram)
 
